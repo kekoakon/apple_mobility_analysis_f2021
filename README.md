@@ -10,5 +10,6 @@ https://covid19.apple.com/mobility
 
 ### Log 
 
+* 2021-09-20: Initialize git repository for the project in 2021
 * 2021-08-31: The data file It was originally downloaded for analysis.
 * 2021-09-17: A new version of the data file was downloaded, and I also worked to refactor the code to be more general and to allow for any state to be subset from the larger file.
