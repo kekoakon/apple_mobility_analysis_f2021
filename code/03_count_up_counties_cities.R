@@ -24,5 +24,6 @@ count_cities_counties_by_type <- state_data %>%
   group_by(geo_type, transportation_type) %>%
   tally()
 
+# write out the result of the dplyr chain
 write.csv(count_cities_counties_by_type,
           "output/california_cities_counties_counts.csv")
