@@ -12,6 +12,7 @@ It currently uses dplyr to work with some of the tabular data. Eventually, it wi
 also include the use of ggplot2 to visualize the dataset 
 
 ### Change Log
+
 * 2020-09-28: Created a function to tally cities and counties for any given state using a dplyr
 chain. Updated the 01 script to include a for loop that subsets multiple states and saves 
 to new csv files. Modified the 02 script to include a for loop that tallies the cities and 
