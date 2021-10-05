@@ -1,0 +1,89 @@
+---
+title: "Analysis of COVID-era Apple Mobility Data"
+author: "Kekoa Kon"
+date: "10/3/2021"
+output: html_document
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = TRUE)
+```
+
+## Setup 
+
+```{r set-parameters}
+# set the state to work with
+state_to_analyze <- "California"
+
+# sanitizing the state name for output files
+state_no_spaces <- gsub(state_to_analyze,
+                       pattern = " ",
+                       replacement = "_")
+
+# set the name of the global data file to use
+global_file_to_process <- "data/raw_data/applemobilitytrends-2021-09-22.csv"
+
+# extract core name for output file naming use
+core_name <- tools::file_path_sans_ext(basename(global_file_to_process))
+```
+
+```{r load-packages-functions}
+# load the packages needed 
+library("dplyr")
+library("readr")
+library("ggplot2")
+library("tidyr")
+library("lubridate")
+library("devtools")
+
+# load the functions needed
+source("code/functions/subset_mobility_data_to_state.R")
+source("code/functions/tally_cities_counties_by_state.R")
+
+```
+
+## Background and Objectives
+
+This rmarkdown file will use `ggplot2` [@ggplot2] and `dplyr` [@dplyr] packages to
+analyze the Apple maps mobility data from the time before the COVID-19 pandemic 
+through the initial shutdowns and the continuing changes over the course of the year.
+
+The goal will be to create a subset to a particular state, tally up the number of 
+cities and counties in that state with mobiltiy data, and then to make several plots
+to visualize those data subsets.
+
+The state that this document will analyze is `r state_to_analyze`.
+
+## Data Processing 
+
+```{r subset-state}
+# subset out to the chose state using the variables set above
+state_subset <- subset_mobility_data_to_state(
+  input_file_name = global_file_to_process,
+  state_to_subset = state_to_analyze)
+```
+
+```{r make-susbset-long}
+# convert the subsetted state data from wide to long format 
+long_subset <- convert_mobility_wide_to_long(
+  file_name_in = paste0("output/subsetted_states_wide/",
+                        core_name,
+                        "_",
+                        state_no_spaces
+                        ".csv"))
+```
+
+```{r tallied_subset}
+# tally up the numbers of cities and counties in the state that have mobility
+# data available
+tallied_subset <- tally_cities_counties_by_state(
+  file_name_in = paste0("output/subsetted_states_wide/",
+                        core_name,
+                        "_",
+                        state_no_spaces,
+                        ".csv"))
+```
+
+
+## Sources cited 
