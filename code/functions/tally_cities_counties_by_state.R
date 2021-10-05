@@ -23,7 +23,7 @@ tally_cities_counties_by_state <- function(state_to_tally) {
 
 
   # read in the complete csv file
-  state_data <- read.csv(input_file_name)
+  state_data <- readr::read_csv(input_file_name)
 
   # use a dplyr chain to tally the city/county, region and transportation
   tallied_by_state <- state_data %>%
@@ -38,8 +38,8 @@ tally_cities_counties_by_state <- function(state_to_tally) {
 
   # save the subset city and county data by state to a new csv file in the
   # output directory
-  write.csv(tallied_by_state, file = paste0("output/",
-                                                      "tallied_files/",
+  readr::write_csv(tallied_by_state, file = paste0("output/",
+                                            "tallied_files/",
                                       tools::file_path_sans_ext(
                                         basename(input_file_name)),
                                       "_",

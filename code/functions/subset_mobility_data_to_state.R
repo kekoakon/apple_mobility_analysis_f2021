@@ -12,7 +12,7 @@
 subset_mobility_data_to_state <- function(input_file_name,
                                           state_to_subset) {
   # read in the complete csv file
-  all_covid_data <- read.csv(input_file_name)
+  all_covid_data <- readr::read_csv(input_file_name)
 
   # subset the dataset to only include rows where the sub.region column has
   # the state name in it, but we want all columns.
@@ -30,4 +30,6 @@ subset_mobility_data_to_state <- function(input_file_name,
                                       "_",
                                       state_to_subset,
                                       ".csv"))
+  # make sure the state names have to spaces
+  state_no_spaces <- gsub(state_to_analyze, pattern = " ", replacement = "_")
 }
