@@ -24,7 +24,7 @@ subset_mobility_data_to_state <- function(input_file_name,
   }
 
   # save the California data to a new csv file in the output directory
-  write.csv(state_data, file = paste0("output/",
+  readr::write_csv(state_data, file = paste0("output/subsetted_data/",
                                       tools::file_path_sans_ext(
                                         basename(input_file_name)),
                                       "_",
