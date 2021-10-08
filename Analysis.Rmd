@@ -40,7 +40,7 @@ library("devtools")
 # load the functions needed
 source("code/functions/subset_mobility_data_to_state.R")
 source("code/functions/tally_cities_counties_by_state.R")
-
+source("code/functions/convert_mobility_wide_to_long.R")
 ```
 
 ## Background and Objectives
