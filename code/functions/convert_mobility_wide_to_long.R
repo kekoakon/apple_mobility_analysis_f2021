@@ -19,7 +19,7 @@ state_data <- readr::read_csv(paste0("output/subsetted_data/",
 
 
 # use a tidyr package to convert the data from wide format to long
-state_data_long <- tidyr::pivot_longer(state_data, cols = starts_with("X202"),
+state_data_long <- tidyr::pivot_longer(state_data, cols = starts_with("202"),
                                       names_to = "date",
                     values_to = "relative_mobility")
 
