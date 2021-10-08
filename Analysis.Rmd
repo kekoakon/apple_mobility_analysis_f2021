@@ -7,7 +7,7 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = TRUE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 ```
 
 ## Setup 
@@ -111,8 +111,34 @@ tallied_plot
 ```
 
 ```{r plot-time-series}
+# produce a line plot of relative driving mobility across the state with date
+# on the x axis and mean relative mobility on the y axis 
+timeseries_plot <- long_subset %>%
+  filter(transportation_type == "driving") %>%
+  group_by(date) %>%
+  summarize(mean_mobility = mean(relative_mobility)) %>%
+  ggplot(aes(x = lubridate::ymd(date),
+             y = mean_mobility)) +
+  geom_line() +
+  labs(title = paste("Statewide mean relative mobility driving levels in",
+                     state_to_analyze,
+                     "during COVID"),
+       x = "Date",
+       y = "Mean relative mobility")
 
+ggsave(plot = timeseries_plot, 
+       filename = paste0("output/figures/",
+                         core_name,
+                         "_",
+                         state_no_spaces,
+                         "_timeseries_plot.png"))
+timeseries_plot
+```
 
+## Session Info
+
+```{r session-info}
+devtools::session_info()
 ```
 
 
