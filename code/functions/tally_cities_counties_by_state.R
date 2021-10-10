@@ -14,16 +14,8 @@ tally_cities_counties_by_state <- function(state_to_tally) {
   # load the dplyr package
   library("dplyr")
 
-  # load in the dataset
-  input_file_name <- paste0("output/subsetted_data/",
-                            "applemobilitytrends-2021-09-16",
-                            "_",
-                            state_to_tally,
-                            ".csv")
-
-
   # read in the complete csv file
-  state_data <- readr::read_csv(input_file_name)
+  state_data <- readr::read_csv(state_to_tally)
 
   # use a dplyr chain to tally the city/county, region and transportation
   tallied_by_state <- state_data %>%
@@ -41,7 +33,7 @@ tally_cities_counties_by_state <- function(state_to_tally) {
   readr::write_csv(tallied_by_state, file = paste0("output/",
                                             "tallied_files/",
                                       tools::file_path_sans_ext(
-                                        basename(input_file_name)),
+                                        basename(state_to_tally)),
                                       "_",
                                       "tally_cities_counties_by_state",
                                       ".csv"))
