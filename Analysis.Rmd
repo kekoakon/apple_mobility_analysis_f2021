@@ -29,7 +29,7 @@ core_name <- tools::file_path_sans_ext(basename(global_file_to_process))
 ```
 
 ```{r load-packages-functions}
-# load the packages needed 
+# load the packages needed
 library("dplyr")
 library("readr")
 library("ggplot2")
@@ -43,7 +43,7 @@ source("code/functions/tally_cities_counties_by_state.R")
 source("code/functions/convert_mobility_wide_to_long.R")
 ```
 
-## Background and Objectives
+## Project Description
 
 This rmarkdown file will use `ggplot2` [@ggplot2] and `dplyr` [@dplyr] packages to
 analyze the Apple maps mobility data from the time before the COVID-19 pandemic 
@@ -55,7 +55,7 @@ to visualize those data subsets.
 
 The state that this document will analyze is `r state_to_analyze`.
 
-## Data Processing 
+## Subsetting Data
 
 ```{r subset-state}
 # subset out to the chose state using the variables set above
@@ -67,17 +67,18 @@ state_subset <- subset_mobility_data_to_state(
 ```{r make-subset-long}
 # convert the subsetted state data from wide to long format 
 long_subset <- convert_mobility_data_wide_to_long(
-  file_name_in = paste0("output/subsetted_states_wide/",
+  input_file_name =  paste0("output/subsetted_states_wide/",
                         core_name,
                         "_",
-                        state_no_spaces))
+                        state_to_analyze,
+                        ".csv"))
 ```
 
 ```{r tallied_subset}
 # tally up the numbers of cities and counties in the state that have mobility
 # data available
 tallied_subset <- tally_cities_counties_by_state(
-  file_name_in = paste0("output/subsetted_states_wide/",
+  state_to_tally = paste0("output/subsetted_states_wide/",
                         core_name,
                         "_",
                         state_no_spaces,
@@ -133,6 +134,20 @@ ggsave(plot = timeseries_plot,
                          state_no_spaces,
                          "_timeseries_plot.png"))
 timeseries_plot
+```
+
+```{r line-plot}
+line_plot <- long_subset %>%
+  filter(transportation_type == "driving") %>%
+  group_by(date) %>%
+  summarize(mean_mobility = mean(relative_mobility)) %>%
+  ggplot(aes(lubridate::ymd(date),
+             y = mean_mobility)) +
+  geom_ribbon()
+	Fill = (blue, alpha = 0.1) +
+geom_line(color = “steelblue”)
+  
+ggsave
 ```
 
 ## Session Info
