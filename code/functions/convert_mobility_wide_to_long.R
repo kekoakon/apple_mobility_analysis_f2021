@@ -10,9 +10,6 @@
 # create a function to convert the Apple mobility data from wide to long
 convert_mobility_data_wide_to_long <- function(input_file_name) {
 
-# load the "dplyr" package
-library("dplyr")
-
 # read in subsetted Apple Mobility data
 state_data <- readr::read_csv(paste0("output/subsetted_data/",
 "applemobilitytrends-2021-09-22_California.csv"))
