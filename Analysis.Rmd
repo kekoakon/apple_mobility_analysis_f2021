@@ -40,7 +40,7 @@ library("devtools")
 # load the functions needed
 source("code/functions/subset_mobility_data_to_state.R")
 source("code/functions/tally_cities_counties_by_state.R")
-source("code/functions/convert_mobility_wide_to_long.R")
+source("code/functions/convert_wide_to_long.R")
 ```
 
 ## Project Description
@@ -65,8 +65,8 @@ state_subset <- subset_mobility_data_to_state(
 ```
 
 ```{r make-subset-long}
-# convert the subsetted state data from wide to long format 
-long_subset <- convert_mobility_data_wide_to_long(
+# convert the subsetted state data from wide to long format
+long_subset <- convert_wide_to_long(
   input_file_name =  paste0("output/subsetted_states_wide/",
                         core_name,
                         "_",
@@ -111,9 +111,9 @@ ggsave(plot = tallied_plot,
 tallied_plot
 ```
 
-```{r plot-time-series}
+```{r plot-time-series-for-driving}
 # produce a line plot of relative driving mobility across the state with date
-# on the x axis and mean relative mobility on the y axis 
+# on the x axis and mean relative mobility on the y axis
 timeseries_plot <- long_subset %>%
   filter(transportation_type == "driving") %>%
   group_by(date) %>%
@@ -127,7 +127,7 @@ timeseries_plot <- long_subset %>%
        x = "Date",
        y = "Mean relative mobility")
 
-ggsave(plot = timeseries_plot, 
+ggsave(plot = timeseries_plot,
        filename = paste0("output/figures/",
                          core_name,
                          "_",
@@ -136,25 +136,34 @@ ggsave(plot = timeseries_plot,
 timeseries_plot
 ```
 
-```{r line-plot}
-line_plot <- long_subset %>%
-  filter(transportation_type == "driving") %>%
+```{r plot-time-series}
+# produce a time series plot that includes relative mobility for walking
+# with date on the x axis and relative mobility on the y axis
+walking_timeseries_plot <- long_subset %>%
+  filter(transportation_type == "walking") %>%
   group_by(date) %>%
-  summarize(mean_mobility = mean(relative_mobility)) %>%
-  ggplot(aes(lubridate::ymd(date),
-             y = mean_mobility)) +
-  geom_ribbon()
-	Fill = (blue, alpha = 0.1) +
-geom_line(color = “steelblue”)
-  
-ggsave
+  ggplot(aes(x = lubridate::ymd(date),
+             y = relative_mobility)) +
+  geom_line() +
+  labs(title = paste("Statewide relative mobility walking levels in",
+                     state_to_analyze,
+                     "during COVID"),
+       x = "Date",
+       y = "Relative mobility")
+
+ggsave(plot = walking_timeseries_plot,
+       filename = paste0("output/figures/",
+                         core_name,
+                         "_",
+                         state_no_spaces,
+                         "_walking_timeseries_plot.png"))
+walking_timeseries_plot
 ```
 
 ## Session Info
 
-```{r session-info}
+```{r plot-time-series}
 devtools::session_info()
 ```
 
-
-## Sources cited 
+## Sources cited
