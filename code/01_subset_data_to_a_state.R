@@ -18,4 +18,3 @@ for (state in c("California", "Texas", "Oregon",
     input_file_name = "data/raw_data/applemobilitytrends-2021-09-16.csv",
     paste(state_to_subset = state))
 }
-
