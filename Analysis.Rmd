@@ -165,7 +165,7 @@ walking_timeseries_plot
 
 ## Session Info
 
-```{r plot-time-series}
+```{r session-info}
 devtools::session_info()
 ```
 
