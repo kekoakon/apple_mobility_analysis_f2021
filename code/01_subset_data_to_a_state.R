@@ -11,14 +11,11 @@
 # load functions
 source("code/functions/subset_mobility_data_to_state.R")
 
-subset_mobility_data_to_state(
-  input_file_name = "data/raw_data/applemobilitytrends-2021-09-16.csv",
-  state_to_subset = "California")
-
 # create a for loop to output files with the given state names
-for (state in c("California", "Texas", "New York", "Oregon",
+for (state in c("California", "Texas", "Oregon",
                 "Michigan", "Alabama", "Virginia")) {
   subset_mobility_data_to_state(
     input_file_name = "data/raw_data/applemobilitytrends-2021-09-16.csv",
     paste(state_to_subset = state))
 }
+
