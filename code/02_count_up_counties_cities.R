@@ -12,7 +12,7 @@ source("code/functions/tally_cities_counties_by_state.R")
 
 # create a for loop to create csv files with tallies for cities and counties
 # transportation
-for (state in c("California", "Texas", "New York", "Oregon",
+for (state in c("California", "Texas", "Oregon",
      "Michigan", "Alabama", "Virginia")) {
   tally_cities_counties_by_state(state_to_tally = state)
 
