@@ -30,9 +30,3 @@ readr::write_csv(state_data_long, file = paste0("output/",
                                           "wide_to_long",
                                           ".csv"))
 }
-# test out the function
-source("code/functions/convert_wide_to_long.R")
-
-convert_wide_to_long(paste0(
-  input_file_name =  "output/subsetted_data/",
-  "applemobilitytrends-2021-09-16_California.csv"))
