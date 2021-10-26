@@ -26,7 +26,7 @@ subset_mobility_data_to_state <- function(input_file_name,
   if (nrow(state_data) == 0) {
     stop("ERROR, No rows matching given state name. Did you make a typo?")
   }
-  # make sure the state names have to spaces
+  # make sure the state names have no spaces
   state_no_spaces <- gsub(state_to_subset, pattern = " ", replacement = "_")
 
   # save the California data to a new csv file in the output directory
