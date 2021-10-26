@@ -2,14 +2,16 @@
 title: "Analysis of COVID-era Apple Mobility Data"
 author: "Kekoa Kon"
 date: "10/3/2021"
-output: html_document
+output:
+  html_document: default
+  word_document: default
 bibliography: references.bib
 params:
-  state: "California"
-  data: "data/raw_data/applemobilitytrends-2021-09-22.csv"
+  state: California
+  data: data/raw_data/applemobilitytrends-2021-09-22.csv
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include= FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 ```
 
