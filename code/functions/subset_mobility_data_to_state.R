@@ -30,7 +30,7 @@ subset_mobility_data_to_state <- function(input_file_name,
   state_no_spaces <- gsub(state_to_subset, pattern = " ", replacement = "_")
 
   # save the California data to a new csv file in the output directory
-  readr::write_csv(state_data, file = paste0("output/subsetted_data/",
+  readr::write_csv(state_data, file = paste0("output/subsetted_states_wide/",
                                       tools::file_path_sans_ext(
                                         basename(input_file_name)),
                                       "_",

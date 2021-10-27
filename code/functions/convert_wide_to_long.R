@@ -11,8 +11,7 @@
 convert_wide_to_long <- function(input_file_name) {
 
 # read in subsetted Apple Mobility data
-state_data <- readr::read_csv(paste0("output/subsetted_data/",
-"applemobilitytrends-2021-09-22_California.csv"))
+state_data <- readr::read_csv(input_file_name)
 
 
 # use a tidyr package to convert the data from wide format to long
