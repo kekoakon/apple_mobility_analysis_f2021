@@ -80,8 +80,8 @@ long_subset <- convert_wide_to_long(
 ```
 
 ```{r tallied_subset}
-# tally up the numbers of cities and counties in the state that have mobility
-# data available
+# tally up the numbers of cities and counties in the state that have
+# mobility data available
 tallied_subset <- tally_cities_counties_by_state(
   state_to_tally = paste0("output/subsetted_states_wide/",
                         core_name,

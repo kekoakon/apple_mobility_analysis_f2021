@@ -34,7 +34,7 @@ subset_mobility_data_to_state <- function(input_file_name,
                                       tools::file_path_sans_ext(
                                         basename(input_file_name)),
                                       "_",
-                                      state_to_subset,
+                                      state_no_spaces,
                                       ".csv"))
 
 }
