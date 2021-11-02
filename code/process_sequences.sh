@@ -20,7 +20,7 @@ fi
 # Tally the sequences and sort by country.
 if [ "$2" = 'TOTAL' ]
 then 
-	echo "The total number of sequences is: "$(bioawk -c fastx 'END{print NR}' "$1" )"
+	echo "The total number of sequences is: " "
 fi
 
 # Now sort the output by country from smallest to largest 
