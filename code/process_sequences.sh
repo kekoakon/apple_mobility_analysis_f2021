@@ -11,17 +11,21 @@
 # Create command line arguments before continuing with the script 
 if [ $# -eq 0 ]
 then
-	echo "Please include two arguments that are needed for the script to run:"
+	echo "Please include an  arguments that are needed for the script to run:"
 	echo "The first argument is a pathway to the compressed sequence dataset."
-	echo "The second argument is to include 'TOTAL' for all detailed output."
 	exit 1
 fi
 
-# Tally the sequences and sort by country.
-if [ "$2" = 'TOTAL' ]
+# Make sure to check that there is only one argument 
+if [ $# -gt 1 ]
 then 
-	echo "The total number of sequences is: " "
+	echo "You only need one argument."
+	exit 1
 fi
 
-# Now sort the output by country from smallest to largest 
-zgrep "isolate.*Homo" "$1" | cut -d"|" -f5 | sort | uniq -c |sort -rn
+# Now count the number of sequences in the whole file
+	echo "The total number of sequences is:" 
+	bioawk -c fastx '{print $name $comment}' "$1" | wc -l
+
+# Last, tally the number of sequences and sort them from largest to smallest
+	bioawk -c fastx '{print  $comment}' "$1" | awk '{split($0,x,"|");print x[21]}' | sort |uniq -c | sort -nr
