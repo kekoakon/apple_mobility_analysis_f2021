@@ -2,11 +2,16 @@
 title: "Analysis of COVID-era Apple Mobility Data"
 author: "Kekoa Kon"
 date: "10/3/2021"
-output: html_document
+output:
+  html_document: default
+  word_document: default
 bibliography: references.bib
+params:
+  state: California
+  data: data/raw_data/applemobilitytrends-2021-09-22.csv
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include= FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 ```
 
@@ -14,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 
 ```{r set-parameters}
 # set the state to work with
-state_to_analyze <- "California"
+state_to_analyze <- params$state
 
 # sanitizing the state name for output files
 state_no_spaces <- gsub(state_to_analyze,
@@ -22,7 +27,7 @@ state_no_spaces <- gsub(state_to_analyze,
                        replacement = "_")
 
 # set the name of the global data file to use
-global_file_to_process <- "data/raw_data/applemobilitytrends-2021-09-22.csv"
+global_file_to_process <- params$data
 
 # extract core name for output file naming use
 core_name <- tools::file_path_sans_ext(basename(global_file_to_process))
@@ -75,8 +80,8 @@ long_subset <- convert_wide_to_long(
 ```
 
 ```{r tallied_subset}
-# tally up the numbers of cities and counties in the state that have mobility
-# data available
+# tally up the numbers of cities and counties in the state that have
+# mobility data available
 tallied_subset <- tally_cities_counties_by_state(
   state_to_tally = paste0("output/subsetted_states_wide/",
                         core_name,
@@ -111,7 +116,7 @@ ggsave(plot = tallied_plot,
 tallied_plot
 ```
 
-```{r plot-time-series-for-driving}
+```{r plot-time-for-driving}
 # produce a line plot of relative driving mobility across the state with date
 # on the x axis and mean relative mobility on the y axis
 timeseries_plot <- long_subset %>%
@@ -162,7 +167,7 @@ walking_timeseries_plot
 
 ## Session Info
 
-```{r plot-time-series}
+```{r session-info}
 devtools::session_info()
 ```
 
