@@ -177,7 +177,7 @@ stopifnot(ncol(seqs_by_country) == 2)
 # make a sideways barplot, log scale x axis, with countries on the y 
 # and the counts of sequences in each on the x, sorted by count
 seq_count_plot <- ggplot(data = seqs_by_country,
-			 aes(x = count,
+			 aes(x = as.numeric(count),
 			     y = reorder(country, count))) +
     geom_col() +
     scale_x_log10() + 
@@ -189,7 +189,6 @@ ggsave(plot = seq_count_plot,
         filename = "output/figures/seq_count_plot.png")
 
 seq_count_plot
-```
 ```
 
 
