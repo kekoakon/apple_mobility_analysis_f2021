@@ -3,16 +3,16 @@
 # transportation. Then, make a csv file and output it into the output directory
 
 # Kekoa Kon
-# September 24, 2021````````
+# September 24, 2021
 # kakon@dons.usfca.edu
+
+# load the dplyr package
+library("dplyr")
 
 # Create a function to tally
 # this should also create an output CSV file that is named based on the state
 # that is subsetted
 tally_cities_counties_by_state <- function(state_to_tally) {
-
-  # load the dplyr package
-  library("dplyr")
 
   # read in the complete csv file
   state_data <- readr::read_csv(state_to_tally)

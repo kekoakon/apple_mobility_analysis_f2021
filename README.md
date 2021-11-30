@@ -13,6 +13,7 @@ also includes the use of ggplot2 to visualize the dataset.
 
 ### Change Log
 
+* 2021-10-26: Parameterize Rmd and add bash script to drive knitting
 * 2021-10-11: Finished Rmarkdown file 
 * 2021-10-05: Added bibliography and citr to Rmarkdown file
 * 2021-10-05: Created an Rmarkdown file to summarize apple mobility dataset project
