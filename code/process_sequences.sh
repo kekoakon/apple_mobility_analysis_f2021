@@ -13,6 +13,7 @@ if [ $# -eq 0 ]
 then
 	echo "Please include an  arguments that are needed for the script to run:"
 	echo "The first argument is a pathway to the compressed sequence dataset."
+	echo "Next, include 'ALL if you would like more detailed output."
 	exit 1
 fi
 
@@ -24,8 +25,11 @@ then
 fi
 
 # Now count the number of sequences in the whole file
+if [ "$2" = 'ALL' ] 
+then
 	echo "The total number of sequences is:" 
 	bioawk -c fastx '{print $name $comment}' "$1" | wc -l
+fi
 
 # Last, tally the number of sequences and sort them from largest to smallest
 	bioawk -c fastx '{print  $comment}' "$1" | awk '{split($0,x,"|");print x[21]}' | sort |uniq -c | sort -nr
