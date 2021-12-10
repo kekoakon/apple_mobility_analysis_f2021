@@ -6,6 +6,7 @@ bibliography: references.bib
 params:
   state: "New York"
   data: "data/raw_data/applemobilitytrends-2021-09-22.csv"
+  seqdata: "output/process_sequences.txt"
 ---
 
 ```{r setup, include= FALSE}
@@ -163,7 +164,7 @@ walking_timeseries_plot
 ```
 
 ```{r plot-sequence-data, fig.height=12}
-# read in the count of the sequences by country (2 columns)
+# read in the count of the sequences by country
 seqs_by_country <- readr::read_table(params$seqdata,
                                      col_names = c("count",
                                                    "country"))
@@ -174,7 +175,8 @@ stopifnot(ncol(seqs_by_country) == 2)
 # and the counts of sequences in each on the x, sorted by count
 seq_count_plot <- ggplot(data = seqs_by_country,
                          aes(x = as.numeric(count),
-                             y = reorder(country, count))) +
+                             y = reorder(country,
+                                         count))) +
     geom_col() +
     scale_x_log10() +
     labs(title = "Count of SARS-CoV-2 sequences per country",
