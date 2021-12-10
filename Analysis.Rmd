@@ -1,7 +1,19 @@
 ---
 title: "Analysis of COVID-era Apple Mobility Data"
 author: "Kekoa Kon"
+<<<<<<< HEAD
 date: "2021-11-29"
+=======
+<<<<<<< HEAD
+date: "10/3/2021"
+output: html_document
+bibliography: references.bib
+params:
+  state: "New York"
+  data: "data/raw_data/applemobilitytrends-2021-09-22.csv"
+=======
+date: "11/29/2021"
+>>>>>>> parameterize-rmd
 output:
   html_document: default
   word_document: default
@@ -10,6 +22,7 @@ params:
   state: California
   data: data/raw_data/applemobilitytrends-2021-09-22.csv
   seqdata: "output/process_sequences.txt"
+>>>>>>> 640aab744faa46f788d4a86de3250fd2a71a3741
 ---
 
 ```{r setup, include= FALSE}
@@ -76,7 +89,7 @@ long_subset <- convert_wide_to_long(
   input_file_name =  paste0("output/subsetted_states_wide/",
                         core_name,
                         "_",
-                        state_to_analyze,
+                        state_no_spaces,
                         ".csv"))
 ```
 
