@@ -2,13 +2,11 @@
 title: "Analysis of COVID-era Apple Mobility Data"
 author: "Kekoa Kon"
 date: "10/3/2021"
-output:
-  html_document: default
-  word_document: default
+output: html_document
 bibliography: references.bib
 params:
-  state: California
-  data: data/raw_data/applemobilitytrends-2021-09-22.csv
+  state: "New York"
+  data: "data/raw_data/applemobilitytrends-2021-09-22.csv"
 ---
 
 ```{r setup, include= FALSE}
@@ -75,7 +73,7 @@ long_subset <- convert_wide_to_long(
   input_file_name =  paste0("output/subsetted_states_wide/",
                         core_name,
                         "_",
-                        state_to_analyze,
+                        state_no_spaces,
                         ".csv"))
 ```
 
