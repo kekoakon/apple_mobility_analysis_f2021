@@ -1,12 +1,24 @@
 ---
 title: "Analysis of COVID-era Apple Mobility Data"
 author: "Kekoa Kon"
+<<<<<<< HEAD
 date: "10/3/2021"
 output: html_document
 bibliography: references.bib
 params:
   state: "New York"
   data: "data/raw_data/applemobilitytrends-2021-09-22.csv"
+=======
+date: "11/29/2021"
+output:
+  html_document: default
+  word_document: default
+bibliography: references.bib
+params:
+  state: California
+  data: data/raw_data/applemobilitytrends-2021-09-22.csv
+  seqdata: "output/process_sequences.txt"
+>>>>>>> 640aab744faa46f788d4a86de3250fd2a71a3741
 ---
 
 ```{r setup, include= FALSE}
@@ -162,6 +174,32 @@ ggsave(plot = walking_timeseries_plot,
                          "_walking_timeseries_plot.png"))
 walking_timeseries_plot
 ```
+
+```{r plot-sequence-data, fig.height=12}
+# read in the count of the sequences by country (2 columns)
+seqs_by_country <- readr::read_table(params$seqdata,
+                                     col_names = c("count",
+                                                   "country"))
+# check that we have the right number of columns
+stopifnot(ncol(seqs_by_country) == 2)
+
+# make a sideways barplot, log scale x axis, with countries on the y
+# and the counts of sequences in each on the x, sorted by count
+seq_count_plot <- ggplot(data = seqs_by_country,
+                         aes(x = as.numeric(count),
+                             y = reorder(country, count))) +
+    geom_col() +
+    scale_x_log10() +
+    labs(title = "Count of SARS-CoV-2 sequences per country",
+         x = "Count of Sequences",
+         y = "Country Name")
+
+ggsave(plot = seq_count_plot,
+        filename = "output/figures/seq_count_plot.png")
+
+seq_count_plot
+```
+
 
 ## Session Info
 
